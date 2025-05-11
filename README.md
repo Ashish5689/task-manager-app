@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Manager
+
+A modern, responsive task management application built with Next.js, Redux Toolkit, TypeScript, and Tailwind CSS.
+
+![Task Manager App](https://via.placeholder.com/800x400?text=Task+Manager+App)
+
+## Features
+
+### Task Management
+- **Add Tasks** with title, description, and priority level (High, Medium, Low)
+- **Edit Tasks** through an intuitive modal interface
+- **Delete Tasks** with a single click
+- **Priority-Based Sorting** - tasks are automatically sorted by priority (High → Medium → Low)
+
+### User Interface
+- **Responsive Design** - fully optimized for mobile, tablet, and desktop screens
+- **Dark/Light Mode Support** - adapts to your system preferences
+- **Color-Coded Priorities**:
+  - Red for High priority tasks
+  - Yellow for Medium priority tasks
+  - Green for Low priority tasks
+- **Modern UI Elements** styled with Tailwind CSS
+- **Smooth Animations & Transitions** for a polished user experience
+
+### Technical Features
+- **State Management** with Redux Toolkit for predictable state updates
+- **Type Safety** with TypeScript
+- **Component-Based Architecture** for maintainability
+- **Real-Time Updates** - task list updates instantly after changes
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18.x or higher
+- npm or yarn
 
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/task-manager-app.git
+cd task-manager-app
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open your browser and navigate to:
+```
+http://localhost:3000
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+task-manager-app/
+├── app/                     # Next.js App Router
+│   ├── components/          # React components
+│   │   ├── TaskCard.tsx     # Individual task card 
+│   │   ├── TaskForm.tsx     # Form for adding tasks
+│   │   ├── TaskList.tsx     # List of all tasks
+│   │   └── EditTaskModal.tsx # Modal for editing tasks
+│   ├── store/               # Redux store
+│   │   ├── features/        # Redux slices
+│   │   │   └── taskSlice.ts # Task reducer and actions
+│   │   ├── Provider.tsx     # Redux provider
+│   │   └── store.ts         # Store configuration
+│   ├── globals.css          # Global styles
+│   ├── layout.tsx           # Root layout
+│   └── page.tsx             # Main page
+├── public/                  # Static assets
+├── .gitignore
+├── next.config.ts
+├── package.json
+├── README.md
+└── tsconfig.json
+```
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+### Adding a Task
+1. Fill in the task title (required)
+2. Add an optional description
+3. Select priority level (High, Medium, Low)
+4. Click "Add Task"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Editing a Task
+1. Click the "Edit" button on any task card
+2. Modify the details in the popup modal
+3. Click "Save Changes" to update
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Deleting a Task
+1. Click the "Delete" button on any task card
+2. The task will be immediately removed
 
-## Deploy on Vercel
+## Built With
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Next.js](https://nextjs.org/) - React framework
+- [Redux Toolkit](https://redux-toolkit.js.org/) - State management
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Development
+
+### Running Tests
+```bash
+npm run test
+# or
+yarn test
+```
+
+### Building for Production
+```bash
+npm run build
+# or
+yarn build
+```
+
+### Deploying
+This application can be easily deployed to platforms like Vercel or Netlify:
+
+```bash
+npm run build
+npm run start
+```
+
+## Future Enhancements
+- Task filtering and search functionality
+- User authentication
+- Task due dates and reminders
+- Drag and drop for task reordering
+- Task categories/labels
+- Data persistence with a backend server
