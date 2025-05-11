@@ -4,33 +4,39 @@ A modern, responsive task management application built with Next.js, Redux Toolk
 
 ![Task Manager App](https://github.com/user-attachments/assets/9ad5a252-b6cd-45e8-b096-70850390111c)
 
+🔗 **Live Project**: [https://task-manager-app-virid-three.vercel.app/](https://task-manager-app-virid-three.vercel.app/)
+
+---
+
 ## Features
 
-### Task Management
+### 📝 Task Management
 - **Add Tasks** with title, description, and priority level (High, Medium, Low)
 - **Edit Tasks** through an intuitive modal interface
 - **Delete Tasks** with a single click
 - **Priority-Based Sorting** - tasks are automatically sorted by priority (High → Medium → Low)
 
-### User Interface
+### 🎨 User Interface
 - **Responsive Design** - fully optimized for mobile, tablet, and desktop screens
 - **Dark/Light Mode Support** - adapts to your system preferences
 - **Color-Coded Priorities**:
-  - Red for High priority tasks
-  - Yellow for Medium priority tasks
-  - Green for Low priority tasks
+  - 🔴 Red for High priority tasks
+  - 🟡 Yellow for Medium priority tasks
+  - 🟢 Green for Low priority tasks
 - **Modern UI Elements** styled with Tailwind CSS
 - **Smooth Animations & Transitions** for a polished user experience
 
-### Technical Features
+### ⚙️ Technical Features
 - **State Management** with Redux Toolkit for predictable state updates
 - **Type Safety** with TypeScript
 - **Component-Based Architecture** for maintainability
 - **Real-Time Updates** - task list updates instantly after changes
 
+---
+
 ## Getting Started
 
-### Prerequisites
+### ✅ Prerequisites
 - Node.js 18.x or higher
 - npm or yarn
 
@@ -134,11 +140,3 @@ This application can be easily deployed to platforms like Vercel or Netlify:
 npm run build
 npm run start
 ```
-
-## Future Enhancements
-- Task filtering and search functionality
-- User authentication
-- Task due dates and reminders
-- Drag and drop for task reordering
-- Task categories/labels
-- Data persistence with a backend server
