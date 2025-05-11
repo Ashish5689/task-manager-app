@@ -3,6 +3,13 @@
 import { useState, useEffect } from 'react';
 import { Task } from '../store/features/taskSlice';
 
+/**
+ * Props for the EditTaskModal component
+ * @property task - The task being edited, null when not editing
+ * @property isOpen - Whether the modal is visible
+ * @property onClose - Function to call when closing the modal
+ * @property onSave - Function to call when saving edits
+ */
 interface EditTaskModalProps {
   task: Task | null;
   isOpen: boolean;
@@ -10,21 +17,35 @@ interface EditTaskModalProps {
   onSave: (task: Task) => void;
 }
 
+/**
+ * EditTaskModal Component
+ * 
+ * Provides a modal interface for editing existing tasks
+ * Manages its own state for the edited task data
+ * Includes form validation and loading states
+ */
 export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTaskModalProps) {
+  // Local state for the task being edited
   const [editedTask, setEditedTask] = useState<Task>({
     id: '',
     title: '',
     description: '',
     priority: 'Medium',
   });
+  // Track saving state for UI feedback
   const [isSaving, setIsSaving] = useState(false);
 
+  // Update local state when a new task is selected for editing
   useEffect(() => {
     if (task) {
       setEditedTask(task);
     }
   }, [task]);
 
+  /**
+   * Updates the edited task state when form inputs change
+   * @param e - Change event from form inputs
+   */
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -35,6 +56,10 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTas
     }));
   };
 
+  /**
+   * Handles form submission and triggers the save callback
+   * @param e - Form submission event
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
@@ -46,12 +71,14 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTas
     }, 300);
   };
 
+  // Color mapping for different priority levels
   const priorityColors = {
     High: 'text-red-600 dark:text-red-400 border-red-300 dark:border-red-700',
     Medium: 'text-yellow-600 dark:text-yellow-400 border-yellow-300 dark:border-yellow-700',
     Low: 'text-green-600 dark:text-green-400 border-green-300 dark:border-green-700',
   };
 
+  // Don't render anything if modal is closed
   if (!isOpen) return null;
 
   return (
@@ -60,6 +87,7 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTas
         className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-auto overflow-hidden transform transition-all duration-300 ease-in-out animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Modal header */}
         <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b dark:border-gray-600 flex justify-between items-center">
           <h3 className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,7 +105,9 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTas
           </button>
         </div>
         
+        {/* Edit form */}
         <form onSubmit={handleSubmit} className="p-6">
+          {/* Title field */}
           <div className="mb-4">
             <label htmlFor="edit-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Title
@@ -93,6 +123,7 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTas
             />
           </div>
           
+          {/* Description field */}
           <div className="mb-4">
             <label htmlFor="edit-description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Description
@@ -107,6 +138,7 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTas
             />
           </div>
           
+          {/* Priority selection */}
           <div className="mb-6">
             <label htmlFor="edit-priority" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Priority
@@ -131,6 +163,7 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave }: EditTas
             </div>
           </div>
           
+          {/* Action buttons */}
           <div className="flex justify-end space-x-3">
             <button
               type="button"

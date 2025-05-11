@@ -4,15 +4,33 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../store/features/taskSlice';
 
+/**
+ * TaskForm Component
+ * 
+ * Renders a form for creating new tasks with fields for:
+ * - Title (required)
+ * - Description (optional)
+ * - Priority level (High/Medium/Low)
+ * 
+ * Includes loading state handling and form reset after submission
+ */
 export default function TaskForm() {
   const dispatch = useDispatch();
+  // State for form fields
   const [task, setTask] = useState({
     title: '',
     description: '',
     priority: 'Medium' as 'High' | 'Medium' | 'Low',
   });
+  // State for tracking form submission
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  /**
+   * Updates the form state when input values change
+   * Handles all form input types with a single handler
+   * 
+   * @param e - Change event from input, textarea, or select elements
+   */
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -23,9 +41,17 @@ export default function TaskForm() {
     }));
   };
 
+  /**
+   * Handles form submission
+   * Prevents default form behavior, validates input,
+   * and dispatches the addTask action with form data
+   * 
+   * @param e - Form submission event
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate that title is not empty
     if (!task.title.trim()) return;
     
     setIsSubmitting(true);
@@ -34,7 +60,7 @@ export default function TaskForm() {
     setTimeout(() => {
       dispatch(addTask(task));
       
-      // Reset form
+      // Reset form to default values
       setTask({
         title: '',
         description: '',
@@ -45,6 +71,7 @@ export default function TaskForm() {
     }, 300);
   };
 
+  // Color mapping for different priority levels
   const priorityColors = {
     High: 'text-red-600 dark:text-red-400',
     Medium: 'text-yellow-600 dark:text-yellow-400',
@@ -61,6 +88,7 @@ export default function TaskForm() {
       </h2>
       
       <form onSubmit={handleSubmit}>
+        {/* Title Field */}
         <div className="mb-4">
           <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Title
@@ -77,6 +105,7 @@ export default function TaskForm() {
           />
         </div>
         
+        {/* Description Field */}
         <div className="mb-4">
           <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Description
@@ -92,6 +121,7 @@ export default function TaskForm() {
           />
         </div>
         
+        {/* Priority Selection */}
         <div className="mb-6">
           <label htmlFor="priority" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Priority
@@ -108,6 +138,7 @@ export default function TaskForm() {
               <option value="Medium" className="text-yellow-600 dark:text-yellow-400">Medium</option>
               <option value="Low" className="text-green-600 dark:text-green-400">Low</option>
             </select>
+            {/* Custom dropdown arrow */}
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300">
               <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" fillRule="evenodd"></path>
@@ -116,6 +147,7 @@ export default function TaskForm() {
           </div>
         </div>
         
+        {/* Submit Button with loading state */}
         <button
           type="submit"
           disabled={isSubmitting}

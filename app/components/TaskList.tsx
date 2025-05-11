@@ -5,14 +5,26 @@ import { Task } from '../store/features/taskSlice';
 import { RootState } from '../store/store';
 import TaskCard from './TaskCard';
 
+/**
+ * Props for the TaskList component
+ */
 interface TaskListProps {
   onEditTask: (task: Task) => void;
   onDeleteTask: (id: string) => void;
 }
 
+/**
+ * TaskList Component
+ * 
+ * Displays a list of tasks or a placeholder message if no tasks exist
+ * Each task is rendered as a TaskCard component with edit/delete capabilities
+ * The list includes staggered animation for a more polished user experience
+ */
 export default function TaskList({ onEditTask, onDeleteTask }: TaskListProps) {
+  // Get tasks from Redux store
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
+  // Display empty state if no tasks exist
   if (tasks.length === 0) {
     return (
       <div className="p-8 text-center bg-white dark:bg-gray-800 rounded-lg shadow animate-fade-in">
@@ -25,6 +37,7 @@ export default function TaskList({ onEditTask, onDeleteTask }: TaskListProps) {
     );
   }
 
+  // Render list of task cards with staggered animation
   return (
     <div className="space-y-4 overflow-hidden">
       {tasks.map((task, index) => (
@@ -32,7 +45,7 @@ export default function TaskList({ onEditTask, onDeleteTask }: TaskListProps) {
           key={task.id} 
           className="animate-slide-in" 
           style={{ 
-            animationDelay: `${index * 0.05}s`,
+            animationDelay: `${index * 0.05}s`, // Staggered animation delay
           }}
         >
           <TaskCard

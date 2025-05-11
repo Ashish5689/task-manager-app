@@ -2,19 +2,31 @@
 
 import { Task } from '../store/features/taskSlice';
 
+/**
+ * Props for the TaskCard component
+ */
 interface TaskCardProps {
   task: Task;
   onEdit: (task: Task) => void;
   onDelete: (id: string) => void;
 }
 
+/**
+ * TaskCard Component
+ * 
+ * Displays an individual task with its details and action buttons
+ * Visual styling changes based on the task's priority level
+ * Provides edit and delete functionality through callback props
+ */
 export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
+  // Gradient background colors based on priority
   const priorityColors = {
     High: 'border-red-500 bg-gradient-to-r from-red-50 to-white dark:from-red-900/20 dark:to-gray-800',
     Medium: 'border-yellow-500 bg-gradient-to-r from-yellow-50 to-white dark:from-yellow-900/20 dark:to-gray-800',
     Low: 'border-green-500 bg-gradient-to-r from-green-50 to-white dark:from-green-900/20 dark:to-gray-800',
   };
 
+  // Badge colors for priority indicator
   const priorityBadgeColors = {
     High: 'bg-red-100 text-red-800 border border-red-200 dark:bg-red-900/30 dark:text-red-200 dark:border-red-700',
     Medium: 'bg-yellow-100 text-yellow-800 border border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-200 dark:border-yellow-700',
@@ -23,6 +35,7 @@ export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
 
   return (
     <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 border-l-4 ${priorityColors[task.priority]} hover:shadow-lg hover:translate-y-[-2px] transition-all duration-200 relative overflow-hidden`}>
+      {/* Task header with title and priority badge */}
       <div className="flex justify-between items-start mb-3">
         <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{task.title}</h3>
         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${priorityBadgeColors[task.priority]}`}>
@@ -30,10 +43,12 @@ export default function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
         </span>
       </div>
       
+      {/* Task description */}
       <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm">
         {task.description || 'No description provided'}
       </p>
       
+      {/* Action buttons */}
       <div className="flex justify-end space-x-2">
         <button
           onClick={() => onEdit(task)}
