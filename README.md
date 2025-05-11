@@ -2,7 +2,7 @@
 
 A modern, responsive task management application built with Next.js, Redux Toolkit, TypeScript, and Tailwind CSS.
 
-![Task Manager App](![image](https://github.com/user-attachments/assets/9ad5a252-b6cd-45e8-b096-70850390111c))
+![Task Manager App](https://github.com/user-attachments/assets/9ad5a252-b6cd-45e8-b096-70850390111c)
 
 ## Features
 
